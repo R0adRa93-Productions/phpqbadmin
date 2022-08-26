@@ -1,5 +1,6 @@
 <?php
 require("includes/config.inc.php");
+require("includes/functions.inc.php");
 $query = null;
 $input = null;
 $timestamp = null;
@@ -19,11 +20,6 @@ VisuallyDamageCars = true\r";
 foreach($garloc as $k => $v){
   $input .= "<br /> ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = '{$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
 }
-$input .= "}
-for _, v in pairs(QBShared.Vehicles) do
- QBShared.VehicleHashes[v.hash] = v
-end
-";
 echo "<h1>{$garconf[0]['autorespawn']}</h1>";
 /*
 if(fwrite($fh,$input)){

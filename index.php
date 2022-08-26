@@ -1,4 +1,6 @@
 <?php
+require("includes/config.inc.php");
+require("includes/functions.inc.php");
 ?>
 <html>
  <head>
