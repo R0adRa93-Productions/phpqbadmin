@@ -18,7 +18,9 @@ require("includes/functions.inc.php");
      </ul>
     </li>
     <li>Manage resources\qb-garages\config.lua
-     <li><a href="qb-garages-config-populator.php">qb-garages/config.lua populator</a></li>
+     <ul>
+      <li><a href="qb-garages-config-populator.php">qb-garages/config.lua populator</a></li>
+     </ul>
     </li>
    </ul>
   </p>
