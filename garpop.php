@@ -24,7 +24,7 @@ for _, v in pairs(QBShared.Vehicles) do
  QBShared.VehicleHashes[v.hash] = v
 end
 ";
-echo "<h1>{$garloc[0]['autorespawn']}</h1>";
+echo "<h1>{$garconf[0]['autorespawn']}</h1>";
 /*
 if(fwrite($fh,$input)){
  echo "<html><head><title>vehpop Happy Potato</title></head><body><h1>Happy Potato</h1><p>The vehicles.lua file was <em>successfully</em> updated.</p></body></html>";
