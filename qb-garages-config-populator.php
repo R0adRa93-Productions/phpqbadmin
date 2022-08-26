@@ -19,7 +19,7 @@
   if(isset($v['putvehicle'])){
    $output .= "['putVehicle'] = {$v['putvehicle']},";
   }
-  $output .= ['takeVehicle'] = {$v['takevehicle']},['spawnVehicle'] = {$v['spawnvehicle']},['blipName'] = '{$v['label']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = {$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
+  $output .= "['takeVehicle'] = {$v['takevehicle']},['spawnVehicle'] = {$v['spawnvehicle']},['blipName'] = '{$v['label']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = {$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
  }
  $output .= "}\rHouseGarages = {}";
  if(fwrite($fh,$output)){
