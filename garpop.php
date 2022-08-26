@@ -12,17 +12,13 @@ $garloc = sqlrun($query);
 $fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-garages\\config.lua",'w');
 $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 $timestamp = date('YmdHis', $timestamp);
-$input = "-- Date and Time Edited: " . date("Y-m-d H:i:s");
-
-$input .= "
-AutoRespawn = false
+$input = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\r";
+$input .= "AutoRespawn = false
 SharedGarages = false
-VisuallyDamageCars = true
-
-";
+VisuallyDamageCars = true\r";
 foreach($garloc as $k => $v){
   $input .= " ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = '{$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
-  echo "$input<br />";
+  echo "<br />$input";
 }
 $input .= "}
 for _, v in pairs(QBShared.Vehicles) do
