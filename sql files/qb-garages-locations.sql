@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2022 at 08:33 PM
+-- Generation Time: Aug 26, 2022 at 11:40 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,7 +31,7 @@ CREATE TABLE `qb-garages-locations` (
   `qb-garages-location_id` bigint(20) UNSIGNED NOT NULL,
   `label` varchar(60) NOT NULL,
   `takevehicle` text NOT NULL,
-  `spawnvehicle` text NOT NULL,
+  `spawnpoint` text NOT NULL,
   `putvehicle` text NOT NULL,
   `showblip` enum('true','false') NOT NULL,
   `blipnumber` int(4) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `qb-garages-locations` (
 -- Dumping data for table `qb-garages-locations`
 --
 
-INSERT INTO `qb-garages-locations` (`qb-garages-location_id`, `label`, `takevehicle`, `spawnvehicle`, `putvehicle`, `showblip`, `blipnumber`, `type`, `vehicle`, `job`) VALUES
+INSERT INTO `qb-garages-locations` (`qb-garages-location_id`, `label`, `takevehicle`, `spawnpoint`, `putvehicle`, `showblip`, `blipnumber`, `type`, `vehicle`, `job`) VALUES
 (1, 'Motel Parking', 'vector3(273.43, -343.99, 44.91)', 'vector4(270.94, -342.96, 43.97, 161.5)', 'vector3(276.69, -339.85, 44.91)', 'true', 357, 'public', 'car', ''),
 (2, 'San Andreas Parking', 'vector3(-330.01, -780.33, 33.96)', 'vector4(-334.44, -780.75, 33.96, 137.5)', 'vector3(-336.31, -774.93, 33.96)', 'true', 357, 'public', 'car', ''),
 (3, 'Spanish Ave Parking', 'vector3(-1160.86, -741.41, 19.63)', 'vector4(-1163.88, -749.32, 18.42, 35.5)', 'vector3(-1147.58, -738.11, 19.31)', 'true', 357, 'public', 'car', ''),
