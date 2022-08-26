@@ -7,7 +7,7 @@ $garconf = array();
 $garloc = array();
 $query = "SELECT * FROM `qb-garages-config`";
 $garconf = sqlrun($query);
-$query = "SELECT * FROM `qb-garage-locations`";
+$query = "SELECT * FROM `qb-garages-locations`";
 $garloc = sqlrun($query);
 $fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-garages\\config.lua",'w');
 $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
@@ -21,7 +21,8 @@ VisuallyDamageCars = true
 
 ";
 foreach($sql as $k => $v){
-  $input .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}'},\r";
+  $input .= " ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = '{$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
+  echo "$input<br />";
 }
 $input .= "}
 for _, v in pairs(QBShared.Vehicles) do
