@@ -12,4 +12,5 @@ $sql = sqlrun($query);
 foreach($sql as $k => $v){
   echo "{$v['id']}<br />";
 }
+/*Change ot code*/
 ?>
