@@ -31,7 +31,7 @@
   if($v['job']){
     $output .= ",\r job = '{$v['job']}'";
    }
-  $output .= "},\r";
+  $output .= "\r },\r";
  }
  $output .= "}\rHouseGarages = {}";
  if(fwrite($fh,$output)){
