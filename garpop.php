@@ -10,7 +10,7 @@
  $garconf = sqlrun($query);
  $query = "SELECT * FROM `qb-garages-locations`";
  $garloc = sqlrun($query);
- //$fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-garages\\config.lua",'w');
+ $fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-garages\\config.lua",'w');
  $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
  $timestamp = date('YmdHis', $timestamp);
  $input = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\r";
