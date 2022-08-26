@@ -19,24 +19,13 @@
  VisuallyDamageCars = {$garconf[0]['visuallydamagecars']}
  Garages = {\r";
  foreach($garloc as $k => $v){
-  $input .= " ['{$v['qb-garages-location_id']}'] = {
-   ['label'] = '{$v['label']}',
-   ['putVehicle'] = '{$v['putvehicle']}',
-   ['takeVehicle'] = '{$v['takevehicle']}',
-   ['spawnVehicle'] = '{$v['spawnvehicle']}',
-   ['showBlip'] = '{$v['showblip']}',
-   ['blipNumber'] = {$v['blipnumber']},
-   ['type'] = '{$v['type']}',
-   ['vehicle'] = '{$v['vehicle']}',
-   ['job'] = '{$v['job']}'
-  },\r";
+  $input .= " ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = {$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
  }
- $input .= "},
- HouseGarages = {}";
+ $input .= "}\rHouseGarages = {}";
  if(fwrite($fh,$input)){
-  echo "<html><head><title>vehpop Happy Potato</title></head><body><h1>Happy Potato</h1><p>The qb-garages/config.lua file was <em>successfully</em> updated.</p></body></html>";
+  echo "<html><head><title>phpqbadmin Happy Potato</title></head><body><h1>Happy Potato</h1><p>The qb-garages/config.lua file was <em>successfully</em> updated.</p></body></html>";
   fclose($fh);
  }else{
-  echo "<html><head><title>vehpop Sad Potato</title></head><body><h1>Sad Potato</h1><p>The qb-garages/config.lua file was <em>not</em> updated.</p></body></html>";
+  echo "<html><head><title>phpqbadmin Sad Potato</title></head><body><h1>Sad Potato</h1><p>The qb-garages/config.lua file was <em>not</em> updated.</p></body></html>";
  }
 ?>
