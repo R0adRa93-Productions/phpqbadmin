@@ -15,7 +15,7 @@
  $timestamp = date('YmdHis', $timestamp);
  $output = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\rAutoRespawn = {$garconf[0]['autorespawn']}\rSharedGarages = {$garconf[0]['sharedgarages']}\rVisuallyDamageCars = {$garconf[0]['visuallydamagecars']}\rGarages = {\r";
  foreach($garloc as $k => $v){
-  $output .= " ['garage{$v['qb-garages-location_id']}'] = {label = '{$v['label']}',takeVehicle = {$v['takevehicle']},spawnVehicle = {$v['spawnvehicle']},blipName = '{$v['label']}',showBlip = {$v['showblip']},blipNumber = {$v['blipnumber']},type = '{$v['type']}',vehicle = '{$v['vehicle']}'";
+  $output .= " ['garage{$v['qb-garages-location_id']}'] = {label = '{$v['label']}',blipName = '{$v['label']}',showBlip = {$v['showblip']},blipNumber = {$v['blipnumber']},takeVehicle = {$v['takevehicle']},spawnPoint = {$v['spawnpoint']},type = '{$v['type']}',vehicle = '{$v['vehicle']}'";
   if($v['putvehicle']){
    $output .= ",putVehicle = {$v['putvehicle']}";
   }
