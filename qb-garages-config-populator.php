@@ -15,13 +15,12 @@
  $timestamp = date('YmdHis', $timestamp);
  $output = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\rAutoRespawn = {$garconf[0]['autorespawn']}\rSharedGarages = {$garconf[0]['sharedgarages']}\rVisuallyDamageCars = {$garconf[0]['visuallydamagecars']}\rGarages = {\r";
  foreach($garloc as $k => $v){
-  $output .= " [{$v['qb-garages-location_id']}] = {['label'] = '{$v['label']}',";
+  $output .= " [{$v['qb-garages-location_id']}] = {label = '{$v['label']}','takeVehicle' = {$v['takevehicle']},spawnVehicle = {$v['spawnvehicle']},blipName = '{$v['label']}',showBlip = '{$v['showblip']}',blipNumber = {$v['blipnumber']},type = '{$v['type']}',vehicle = '{$v['vehicle']}',job = '{$v['job']}'}";
   if(isset($v['putvehicle'])){
-   $output .= "['putVehicle'] = {$v['putvehicle']},";
+   $output .= ",putVehicle = {$v['putvehicle']}";
   }
-  $output .= "['takeVehicle'] = {$v['takevehicle']},['spawnVehicle'] = {$v['spawnvehicle']},['blipName'] = '{$v['label']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = {$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
  }
- $output .= "}\rHouseGarages = {}";
+ $output .= "\r}\rHouseGarages = {}";
  if(fwrite($fh,$output)){
   echo "<html><head><title>phpqbadmin Happy Potato</title></head><body><h1>Happy Potato</h1><p>The qb-garages/config.lua file was <em>successfully</em> updated.</p></body></html>";
   fclose($fh);
