@@ -1,17 +1,24 @@
 <?php
 require("includes/config.inc.php");
-$query = "SELECT * FROM `vehicles`";
-$sql = sqlrun($query);
-$fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-core\\shared\\vehicles.lua",'w');
+$query = null;
 $input = null;
 $timestamp = null;
+$garconf = array();
+$garloc = array();
+$query = "SELECT * FROM `qb-garages-config`"
+$garconf = sqlrun($query);
+$query = "SELECT * FROM `qb-garage-locations`";
+$garloc = sqlrun($query);
+$fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-garages\\config.lua",'w');
 $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
 $timestamp = date('YmdHis', $timestamp);
-$input = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "
-QBShared = QBShared or {}
-QBShared.Vehicles = {}
-QBShared.VehicleHashes = {}
-QBShared.Vehicles = {
+$input = "-- Date and Time Edited: " . date("Y-m-d H:i:s")
+
+$input .= "
+AutoRespawn = false
+SharedGarages = false
+VisuallyDamageCars = true
+
 ";
 foreach($sql as $k => $v){
   $input .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}'},\r";
@@ -21,12 +28,15 @@ for _, v in pairs(QBShared.Vehicles) do
  QBShared.VehicleHashes[v.hash] = v
 end
 ";
+echo "<h1>{$garloc[0]['autorespawn']}</h1>";
+/*
 if(fwrite($fh,$input)){
  echo "<html><head><title>vehpop Happy Potato</title></head><body><h1>Happy Potato</h1><p>The vehicles.lua file was <em>successfully</em> updated.</p></body></html>";
  fclose($fh);
 }else{
  echo "<html><head><title>vehpop Sad Potato</title></head><body><h1>Sad Potato</h1><p>The vehicles.lua file was <em>not</em> updated.</p></body></html>";
 }
+*/
 function sqlrun($query){
   global $dbinfo;
   global $messages;
