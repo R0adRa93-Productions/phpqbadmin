@@ -13,8 +13,8 @@ require("includes/functions.inc.php");
    <ul>
     <li>Manage resources\qb-core\shared\vehicles.lua
      <ul>
-      <li><a href="qb-core-shared-vehicles-populator">qb-core/shared/vehicles.lua populator</a></li>
-      <li><a href="qb-core-shared-vehicles-categories-list">List Vehicle Categories</a></li>
+      <li><a href="qb-core-shared-vehicles-populator.php">qb-core/shared/vehicles.lua populator</a></li>
+      <li><a href="qb-core-shared-vehicles-categories-list.php">List Vehicle Categories</a></li>
      </ul>
     </li>
     <li>Manage resources\qb-garages\config.lua
