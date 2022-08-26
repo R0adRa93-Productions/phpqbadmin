@@ -15,7 +15,7 @@
  $timestamp = date('YmdHis', $timestamp);
  $input = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\rAutoRespawn = {$garconf[0]['autorespawn']}\rSharedGarages = {$garconf[0]['sharedgarages']}\rVisuallyDamageCars = {$garconf[0]['visuallydamagecars']}\rGarages = {\r";
  foreach($garloc as $k => $v){
-  $input .= " ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = {$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
+  $input .= " ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['blipLabel'] = '{$v['label']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = {$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
  }
  $input .= "}\rHouseGarages = {}";
  if(fwrite($fh,$input)){
