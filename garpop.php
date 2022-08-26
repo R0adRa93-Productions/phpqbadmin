@@ -20,7 +20,7 @@ SharedGarages = false
 VisuallyDamageCars = true
 
 ";
-foreach($sql as $k => $v){
+foreach($garloc as $k => $v){
   $input .= " ['{$v['qb-garages-location_id']}'] = {['label'] = '{$v['label']}',['putVehicle'] = '{$v['putvehicle']}',['takeVehicle'] = '{$v['takevehicle']}',['spawnVehicle'] = '{$v['spawnvehicle']}',['showBlip'] = '{$v['showblip']}',['blipNumber'] = '{$v['blipnumber']},['type'] = '{$v['type']}',['vehicle'] = '{$v['vehicle']}',['job'] = '{$v['job']}'},\r";
   echo "$input<br />";
 }
