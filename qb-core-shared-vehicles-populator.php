@@ -1,7 +1,7 @@
 <?php
 require("includes/config.inc.php");
 require("includes/functions.inc.php");
-$query = "SELECT * FROM `vehicles`";
+$query = "SELECT * FROM `qb-core-shared-vehicles`";
 $sql = sqlrun($query);
 $fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-core\\shared\\vehicles.lua",'w');
 $output = null;
