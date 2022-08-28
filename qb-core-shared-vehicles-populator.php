@@ -15,7 +15,9 @@ QBShared.VehicleHashes = {}
 QBShared.Vehicles = {
 ";
 foreach($sql as $k => $v){
-  $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}'},\r";
+  if($v['enabled'] === 'true'){
+   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}'},\r";
+  }
 }
 $output .= "}
 for _, v in pairs(QBShared.Vehicles) do
