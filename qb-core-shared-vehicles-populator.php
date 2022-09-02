@@ -3,7 +3,7 @@ require("includes/config.inc.php");
 require("includes/functions.inc.php");
 $query = "SELECT * FROM `qb-core-shared-vehicles`";
 $sql = sqlrun($query);
-$fh = fopen("C:\\Program Files\\FXServer\\txData\\QBCoreFramework\\resources\\[qb]\\qb-core\\shared\\vehicles.lua",'w');
+$fh = fopen(VEHICLES,'w');
 $output = null;
 $timestamp = null;
 $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
