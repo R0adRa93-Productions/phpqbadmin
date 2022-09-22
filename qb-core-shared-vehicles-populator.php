@@ -16,7 +16,7 @@ QBShared.Vehicles = {
 ";
 foreach($sql as $k => $v){
   if($v['enabled'] === 'true'){
-   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}'},\r";
+   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['store'] = '{{$v['store']}}'},\r";
   }
 }
 $output .= "}
@@ -26,8 +26,8 @@ end
 ";
 if(fwrite($fh,$output)){
  echo "<html><head><title>phpqbadmin Happy Potato</title></head><body><h1>Happy Potato</h1><p>The vehicles.lua file was <em>successfully</em> updated.</p></body></html>";
- fclose($fh);
 }else{
  echo "<html><head><title>phpqbadmin Sad Potato</title></head><body><h1>Sad Potato</h1><p>The vehicles.lua file was <em>not</em> updated.</p></body></html>";
 }
+fclose($fh);
 ?>

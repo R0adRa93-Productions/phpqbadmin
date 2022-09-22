@@ -11,15 +11,28 @@ require("includes/functions.inc.php");
   <h2>Select an option</h2>
   <p>
    <ul>
-    <li>Manage resources\qb-core\shared\vehicles.lua
+    <li>qb-core
      <ul>
-      <li><a href="qb-core-shared-vehicles-populator.php">qb-core/shared/vehicles.lua populator</a></li>
-      <li><a href="qb-core-shared-vehicles-categories-list.php">List Vehicle Categories</a></li>
+      <li>Manage \shared\items.lua
+       <ul>
+        <li><a href="qb-core-shared-items-populator.php">qb-core/shared/items.lua populator</a></li>
+       </ul>
+      </li>
+      <li>Manage \shared\vehicles.lua
+       <ul>
+        <li><a href="qb-core-shared-vehicles-populator.php">qb-core/shared/vehicles.lua populator</a></li>
+        <li><a href="qb-core-shared-vehicles-categories-list.php">List Vehicle Categories</a></li>
+       </ul>
+      </li>
      </ul>
     </li>
-    <li>Manage resources\qb-garages\config.lua
+    <li>qb-garages
      <ul>
-      <li><a href="qb-garages-config-populator.php">qb-garages/config.lua populator</a></li>
+      <li>Manage \config.lua
+       <ul>
+        <li><a href="qb-garages-config-populator.php">qb-garages/config.lua populator</a></li>
+       </ul>
+      </li>
      </ul>
     </li>
    </ul>
