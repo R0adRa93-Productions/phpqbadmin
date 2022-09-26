@@ -16,7 +16,12 @@ QBShared.Vehicles = {
 ";
 foreach($sql as $k => $v){
   if($v['enabled'] === 'true'){
-   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['store'] = '{{$v['store']}}'},\r";
+   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['store'] = ";
+   $v['store'] = explode(',',$v['store']);
+   foreach($v['store'] as $k => $v){
+    $output .= "'{$v}',";
+   }
+   $output .= "}\r\n";
   }
 }
 $output .= "}
