@@ -24,9 +24,9 @@ foreach($sql as $k => $v){
    $v['store'] = explode(',',$v['store']);
    $countb = count($v['store']);
    foreach($v['store'] as $k => $v){
-    $count--;
+    $countb--;
     $output .= "'{$v}'";
-    if($count > 0){$output .= ",";}
+    if($countb > 0){$output .= ",";}
    }
    $output .= "}}";
    if($counta > 0){$output .= ",";}
