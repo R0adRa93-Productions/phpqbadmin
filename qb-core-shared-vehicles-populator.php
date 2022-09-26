@@ -4,6 +4,7 @@ require("includes/functions.inc.php");
 $query = "SELECT * FROM `qb-core-shared-vehicles`";
 $sql = sqlrun($query);
 $fh = fopen(VEHICLES,'w');
+$count = null;
 $output = null;
 $timestamp = null;
 $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
@@ -16,12 +17,15 @@ QBShared.Vehicles = {
 ";
 foreach($sql as $k => $v){
   if($v['enabled'] === 'true'){
-   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['store'] = ";
+   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['store'] = {";
    $v['store'] = explode(',',$v['store']);
+   $count = count($v['store']);
    foreach($v['store'] as $k => $v){
-    $output .= "'{$v}',";
+    $count--;
+    $output .= "'{$v}'";
+    if($count > 0){$output .= ",";}
    }
-   $output .= "}\r\n";
+   $output .= "}}\r\n";
   }
 }
 $output .= "}
