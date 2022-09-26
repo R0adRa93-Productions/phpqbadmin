@@ -20,10 +20,10 @@ $counta = count($sql);
 foreach($sql as $k => $v){
   $counta--;
   if($v['enabled'] === 'true'){
-   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['store'] = {";
-   $v['store'] = explode(',',$v['store']);
-   $countb = count($v['store']);
-   foreach($v['store'] as $k => $v){
+   $output .= " ['{$v['model']}'] = {['name'] = '{$v['name']}',['brand'] = '{$v['brand']}',['model'] = '{$v['model']}',['price'] = '{$v['price']}',['category'] = '{$v['category']}',['hash'] = '{$v['model']}',['shop'] = {";
+   $v['shop'] = explode(',',$v['shop']);
+   $countb = count($v['shop']);
+   foreach($v['shop'] as $k => $v){
     $countb--;
     $output .= "'{$v}'";
     if($countb > 0){$output .= ",";}
