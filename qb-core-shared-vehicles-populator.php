@@ -1,6 +1,5 @@
 <?php
 require("includes/config.inc.php");
-require("includes/functions.inc.php");
 $query = "SELECT * FROM `qb-core-shared-vehicles`";
 $sql = sqlrun($query);
 $fh = fopen(VEHICLES,'w');

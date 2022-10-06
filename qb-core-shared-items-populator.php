@@ -1,6 +1,5 @@
 <?php
  require("includes/config.inc.php");
- require("includes/functions.inc.php");
  $query1 = "SELECT * FROM `qb-core-shared-items-weapons`";
  $query2 = "SELECT * FROM `qb-core-shared-items`";
  $sql1 = sqlrun($query1);

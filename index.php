@@ -1,6 +1,5 @@
 <?php
 require("includes/config.inc.php");
-require("includes/functions.inc.php");
 ?>
 <html>
  <head>
@@ -31,6 +30,15 @@ require("includes/functions.inc.php");
       <li>Manage \config.lua
        <ul>
         <li><a href="qb-garages-config-populator.php">qb-garages/config.lua populator</a></li>
+       </ul>
+      </li>
+     </ul>
+    </li>
+    <li>qb-shops
+     <ul>
+      <li>Manage \config.lua
+       <ul>
+        <li><a href="qb-shops-config-populator.php">qb-shops/config.lua populator</a></li>
        </ul>
       </li>
      </ul>

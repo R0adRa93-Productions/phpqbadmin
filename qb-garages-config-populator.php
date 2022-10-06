@@ -1,6 +1,5 @@
 <?php
  require("includes/config.inc.php");
- require("includes/functions.inc.php");
  $query = null;
  $output = null;
  $timestamp = null;
@@ -16,9 +15,9 @@
  $output = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\rAutoRespawn = {$garconf[0]['autorespawn']}\rSharedGarages = {$garconf[0]['sharedgarages']}\rVisuallyDamageCars = {$garconf[0]['visuallydamagecars']}\rGarages = {\r";
  foreach($garloc as $k => $v){
   if($v['enabled'] === 'true'){
-   $output .= " ['garage{$v['qb-garages-location_id']}'] = {
+   $output .= " ['garage{$v['name']}'] = {
    label = '{$v['label']}',
-   blipName = '{$v['label']}',
+   blipName = '{$v['blipname']}',
    showBlip = {$v['showblip']},
    blipNumber = {$v['blipnumber']},
    takeVehicle = {$v['takevehicle']},

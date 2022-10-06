@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2022 at 05:40 PM
+-- Generation Time: Oct 05, 2022 at 08:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -314,7 +314,7 @@ CREATE TABLE `qb-core-shared-vehicles` (
   `model` text NOT NULL,
   `price` bigint(20) NOT NULL,
   `category` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `store` text NOT NULL,
+  `shop` text NOT NULL,
   `enabled` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -322,7 +322,7 @@ CREATE TABLE `qb-core-shared-vehicles` (
 -- Dumping data for table `qb-core-shared-vehicles`
 --
 
-INSERT INTO `qb-core-shared-vehicles` (`id`, `name`, `brand`, `model`, `price`, `category`, `store`, `enabled`) VALUES
+INSERT INTO `qb-core-shared-vehicles` (`id`, `name`, `brand`, `model`, `price`, `category`, `shop`, `enabled`) VALUES
 (1, 'Asbo', 'Maxwell', 'asbo', 4000, 'compacts', 'pdm', 'true'),
 (2, 'Blista', 'Dinka', 'blista', 13000, 'compacts', 'pdm', 'true'),
 (3, 'Brioso R/A', 'Grotti', 'brioso', 20000, 'compacts', 'pdm', 'true'),
@@ -859,11 +859,13 @@ INSERT INTO `qb-garages-config` (`qb-garages-config-id`, `autorespawn`, `sharedg
 
 CREATE TABLE `qb-garages-locations` (
   `qb-garages-location_id` bigint(20) UNSIGNED NOT NULL,
-  `label` varchar(60) NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `label` varchar(50) NOT NULL DEFAULT '',
   `takevehicle` text NOT NULL,
   `spawnpoint` text NOT NULL,
   `putvehicle` text NOT NULL,
   `showblip` enum('true','false') NOT NULL,
+  `blipname` text DEFAULT NULL,
   `blipnumber` int(4) NOT NULL,
   `type` enum('public','depot','gang','job') NOT NULL,
   `vehicle` enum('car','air','sea') NOT NULL,
@@ -875,35 +877,198 @@ CREATE TABLE `qb-garages-locations` (
 -- Dumping data for table `qb-garages-locations`
 --
 
-INSERT INTO `qb-garages-locations` (`qb-garages-location_id`, `label`, `takevehicle`, `spawnpoint`, `putvehicle`, `showblip`, `blipnumber`, `type`, `vehicle`, `job`, `enabled`) VALUES
-(1, 'Motel Parking', 'vector3(273.43, -343.99, 44.91)', 'vector4(270.94, -342.96, 43.97, 161.5)', 'vector3(276.69, -339.85, 44.91)', 'true', 357, 'public', 'car', '', 'true'),
-(2, 'San Andreas Parking', 'vector3(-330.01, -780.33, 33.96)', 'vector4(-334.44, -780.75, 33.96, 137.5)', 'vector3(-336.31, -774.93, 33.96)', 'true', 357, 'public', 'car', '', 'true'),
-(3, 'Spanish Ave Parking', 'vector3(-1160.86, -741.41, 19.63)', 'vector4(-1163.88, -749.32, 18.42, 35.5)', 'vector3(-1147.58, -738.11, 19.31)', 'true', 357, 'public', 'car', '', 'true'),
-(4, 'Caears 24 Parking', 'vector3(69.84, 12.6, 68.96)', 'vector4(73.21, 10.72, 68.83, 163.5)', 'vector3(65.43, 21.19, 69.47)', 'true', 357, 'public', 'car', '', 'true'),
-(5, 'Caears 24 Parking II', 'vector3(-475.31, -818.73, 30.46)', 'vector4(-472.03, -815.47, 30.5, 177.5)', 'vector3(-453.6, -817.08, 30.61)', 'true', 357, 'public', 'car', '', 'true'),
-(6, 'Laguna Parking', 'vector3(364.37, 297.83, 103.49)', 'vector4(367.49, 297.71, 103.43, 340.5)', 'vector3(363.04, 283.51, 103.38)', 'true', 357, 'public', 'car', '', 'true'),
-(7, 'Airport Parking', 'vector3(-796.86, -2024.85, 8.88)', 'vector4(-800.41, -2016.53, 9.32, 48.5)', 'vector3(-804.84, -2023.21, 9.16)', 'true', 357, 'public', 'car', '', 'true'),
-(8, 'Beach Parking', 'vector3(-1183.1, -1511.11, 4.36)', 'vector4(-1181.0, -1505.98, 4.37, 214.5)', 'vector3(-1176.81, -1498.63, 4.37)', 'true', 357, 'public', 'car', '', 'true'),
-(9, 'The Motor Hotel Parking', 'vector3(1137.77, 2663.54, 37.9)', 'vector4(1137.69, 2673.61, 37.9, 359.5)', 'vector3(1137.75, 2652.95, 37.9)', 'true', 357, 'public', 'car', '', 'true'),
-(10, 'Liqour Parking', 'vector3(934.95, 3606.59, 32.81)', 'vector4(941.57, 3619.99, 32.5, 141.5)', 'vector3(939.37, 3612.25, 32.69)', 'true', 357, 'public', 'car', '', 'true'),
-(11, 'Shore Parking', 'vector3(1726.21, 3707.16, 34.17)', 'vector4(1730.31, 3711.07, 34.2, 20.5)', 'vector3(1737.13, 3718.91, 34.04)', 'true', 357, 'public', 'car', '', 'true'),
-(12, 'Bell Farms Parking', 'vector3(78.34, 6418.74, 31.28)', 'vector4(70.71, 6425.16, 30.92, 68.5)', 'vector3(85.3, 6427.52, 31.33)', 'true', 357, 'public', 'car', '', 'true'),
-(13, 'Dumbo Private Parking', 'vector3(157.26, -3240.00, 7.00)', 'vector4(165.32, -3236.10, 5.93, 268.5)', 'vector3(165.32, -3230.00, 5.93)', 'true', 357, 'public', 'car', '', 'true'),
-(14, 'Pillbox Garage Parking', 'vector3(215.9499, -809.698, 30.731)', 'vector4(234.1942, -787.066, 30.193, 159.6)', 'vector3(218.0894, -781.370, 30.389)', 'true', 357, 'public', 'car', '', 'true'),
-(15, 'Impound Lot', 'vector3(409.89, -1623.51, 29.29)', 'vector4(407.92, -1646.29, 29.29, 226.39)', '', 'true', 68, 'depot', 'car', '', 'true'),
-(16, 'Ballas', 'vector3(98.50, -1954.49, 20.84)', 'vector4(98.50, -1954.49, 20.75, 335.73)', 'vector3(94.75, -1959.93, 20.84)', 'false', 357, 'gang', 'car', 'ballas', 'true'),
-(17, 'La Familia', 'vector3(-811.65, 187.49, 72.48)', 'vector4(-818.43, 184.97, 72.28, 107.85)', 'vector3(-811.65, 187.49, 72.48)', 'false', 357, 'gang', 'car', 'families', 'true'),
-(18, 'Lost MC', 'vector3(957.25, -129.63, 74.39)', 'vector4(957.25, -129.63, 74.39, 199.21)', 'vector3(950.47, -122.05, 74.36)', 'false', 357, 'gang', 'car', 'lostmc', 'true'),
-(19, 'Cartel', 'vector3(1407.18, 1118.04, 114.84)', 'vector4(1407.18, 1118.04, 114.84, 88.34)', 'vector3(1407.18, 1118.04, 114.84)', 'false', 357, 'gang', 'car', 'cartel', 'true'),
-(20, 'Police', 'vector3(454.6, -1017.4, 28.4)', 'vector4(438.4, -1018.3, 27.7, 90.0)', 'vector3(452.88, -1006.98, 27.5)', 'false', 357, '', 'car', 'police', 'true'),
-(21, 'Airport Hangar', 'vector3(-1025.92, -3017.86, 13.95)', 'vector4(-979.2, -2995.51, 13.95, 52.19)', 'vector3(-1003.38, -3008.87, 13.95)', 'true', 360, 'public', 'air', '', 'true'),
-(22, 'Higgins Helitours', 'vector3(-722.15, -1472.79, 5.0)', 'vector4(-724.83, -1443.89, 5.0, 140.1)', 'vector3(-745.48, -1468.46, 5.0)', 'true', 360, 'public', 'air', '', 'true'),
-(23, 'Sandy Shores Hangar', 'vector3(1758.19, 3296.66, 41.14)', 'vector4(1740.98, 3279.08, 41.75, 106.77)', 'vector3(1740.4, 3283.92, 41.1)', 'true', 360, 'public', 'air', '', 'true'),
-(24, 'Air Depot', 'vector3(-1243.29, -3392.3, 13.94)', 'vector4(-1269.67, -3377.74, 13.94, 327.88)', '', 'true', 359, 'depot', 'air', '', 'true'),
-(25, 'LSYMC Boathouse', 'vector3(-794.66, -1510.83, 1.59)', 'vector4(-793.58, -1501.4, 0.12, 111.5)', 'vector3(-793.58, -1501.4, 0.12)', 'true', 356, 'public', 'sea', '', 'true'),
-(26, 'Paleto Boathouse', 'vector3(-277.46, 6637.2, 7.48)', 'vector4(-289.2, 6637.96, 1.01, 45.5)', 'vector3(-289.2, 6637.96, 1.01)', 'true', 356, 'public', 'sea', '', 'true'),
-(27, 'Millars Boathouse', 'vector3(1299.24, 4216.69, 33.9)', 'vector4(1297.82, 4209.61, 30.12, 253.5)', 'vector3(1297.82, 4209.61, 30.12)', 'true', 356, 'public', 'sea', '', 'true'),
-(28, 'LSYMC Depot', 'vector3(-772.98, -1430.76, 1.59)', 'vector4(-729.77, -1355.49, 1.19, 142.5)', '', 'true', 356, 'depot', 'sea', '', 'true');
+INSERT INTO `qb-garages-locations` (`qb-garages-location_id`, `name`, `label`, `takevehicle`, `spawnpoint`, `putvehicle`, `showblip`, `blipname`, `blipnumber`, `type`, `vehicle`, `job`, `enabled`) VALUES
+(1, 'motelgarage', 'Motel Parking', 'vector3(273.43, -343.99, 44.91)', 'vector4(270.94, -342.96, 43.97, 161.5)', 'vector3(276.69, -339.85, 44.91)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(2, 'sapcounsel', 'San Andreas Parking', 'vector3(-330.01, -780.33, 33.96)', 'vector4(-334.44, -780.75, 33.96, 137.5)', 'vector3(-336.31, -774.93, 33.96)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(3, 'spanishave', 'Spanish Ave Parking', 'vector3(-1160.86, -741.41, 19.63)', 'vector4(-1163.88, -749.32, 18.42, 35.5)', 'vector3(-1147.58, -738.11, 19.31)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(4, 'caears24', 'Caears 24 Parking', 'vector3(69.84, 12.6, 68.96)', 'vector4(73.21, 10.72, 68.83, 163.5)', 'vector3(65.43, 21.19, 69.47)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(5, 'caears242', 'Caears 24 Parking', 'vector3(-475.31, -818.73, 30.46)', 'vector4(-472.03, -815.47, 30.5, 177.5)', 'vector3(-453.6, -817.08, 30.61)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(6, 'lagunapi', 'Laguna Parking', 'vector3(364.37, 297.83, 103.49)', 'vector4(367.49, 297.71, 103.43, 340.5)', 'vector3(363.04, 283.51, 103.38)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(7, 'airportp', 'Airport Parking', 'vector3(-796.86, -2024.85, 8.88)', 'vector4(-800.41, -2016.53, 9.32, 48.5)', 'vector3(-804.84, -2023.21, 9.16)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(8, 'beachp', 'Beach Parking', 'vector3(-1183.1, -1511.11, 4.36)', 'vector4(-1181.0, -1505.98, 4.37, 214.5)', 'vector3(-1176.81, -1498.63, 4.37)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(9, 'themotorhotel', 'The Motor Hotel Parking', 'vector3(1137.77, 2663.54, 37.9)', 'vector4(1137.69, 2673.61, 37.9, 359.5)', 'vector3(1137.75, 2652.95, 37.9)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(10, 'liqourparking', 'Liqour Parking', 'vector3(934.95, 3606.59, 32.81)', 'vector4(941.57, 3619.99, 32.5, 141.5)', 'vector3(939.37, 3612.25, 32.69)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(11, 'shoreparking', 'Shore Parking', 'vector3(1726.21, 3707.16, 34.17)', 'vector4(1730.31, 3711.07, 34.2, 20.5)', 'vector3(1737.13, 3718.91, 34.04)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(12, 'haanparking', 'Bell Farms Parking', 'vector3(78.34, 6418.74, 31.28)', 'vector4(70.71, 6425.16, 30.92, 68.5)', 'vector3(85.3, 6427.52, 31.33)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(13, 'dumbogarage', 'Dumbo Private Parking', 'vector3(157.26, -3240.00, 7.00)', 'vector4(165.32, -3236.10, 5.93, 268.5)', 'vector3(165.32, -3230.00, 5.93)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(14, 'pillboxgarage', 'Pillbox Garage Parking', 'vector3(215.9499, -809.698, 30.731)', 'vector4(234.1942, -787.066, 30.193, 159.6)', 'vector3(218.0894, -781.370, 30.389)', 'true', 'Public Parking', 357, 'public', 'car', '', 'true'),
+(15, 'impoundlot', 'Impound Lot', 'vector3(409.89, -1623.51, 29.29)', 'vector4(407.92, -1646.29, 29.29, 226.39)', '', 'true', 'Impound Lot', 68, 'depot', 'car', '', 'true'),
+(16, 'ballas', 'Ballas', 'vector3(98.50, -1954.49, 20.84)', 'vector4(98.50, -1954.49, 20.75, 335.73)', 'vector3(94.75, -1959.93, 20.84)', 'false', 'Ballas', 357, 'gang', 'car', 'ballas', 'true'),
+(17, 'families', 'La Familia', 'vector3(-811.65, 187.49, 72.48)', 'vector4(-818.43, 184.97, 72.28, 107.85)', 'vector3(-811.65, 187.49, 72.48)', 'false', 'La Familia', 357, 'gang', 'car', 'families', 'true'),
+(18, 'lostmc', 'Lost MC', 'vector3(957.25, -129.63, 74.39)', 'vector4(957.25, -129.63, 74.39, 199.21)', 'vector3(950.47, -122.05, 74.36)', 'false', 'Lost MC', 357, 'gang', 'car', 'lostmc', 'true'),
+(19, 'cartel', 'Cartel', 'vector3(1407.18, 1118.04, 114.84)', 'vector4(1407.18, 1118.04, 114.84, 88.34)', 'vector3(1407.18, 1118.04, 114.84)', 'false', 'Cartel', 357, 'gang', 'car', 'cartel', 'true'),
+(20, 'police', 'Police', 'vector3(454.6, -1017.4, 28.4)', 'vector4(438.4, -1018.3, 27.7, 90.0)', 'vector3(452.88, -1006.98, 27.5)', 'false', 'Police', 357, 'job', 'car', 'police', 'true'),
+(21, 'intairport', 'Airport Hangar', 'vector3(-1025.92, -3017.86, 13.95)', 'vector4(-979.2, -2995.51, 13.95, 52.19)', 'vector3(-1003.38, -3008.87, 13.95)', 'true', 'Hangar', 360, 'public', 'air', '', 'true'),
+(22, 'higginsheli', 'Higgins Helitours', 'vector3(-722.15, -1472.79, 5.0)', 'vector4(-724.83, -1443.89, 5.0, 140.1)', 'vector3(-745.48, -1468.46, 5.0)', 'true', 'Hangar', 360, 'public', 'air', '', 'true'),
+(23, 'airsshores', 'Sandy Shores Hangar', 'vector3(1758.19, 3296.66, 41.14)', 'vector4(1740.98, 3279.08, 41.75, 106.77)', 'vector3(1740.4, 3283.92, 41.1)', 'true', 'Hangar', 360, 'public', 'air', '', 'true'),
+(24, 'airdepot', 'Air Depot', 'vector3(-1243.29, -3392.3, 13.94)', 'vector4(-1269.67, -3377.74, 13.94, 327.88)', '', 'true', 'Air Depot', 359, 'depot', 'air', '', 'true'),
+(25, 'lsymc', 'LSYMC Boathouse', 'vector3(-794.66, -1510.83, 1.59)', 'vector4(-793.58, -1501.4, 0.12, 111.5)', 'vector3(-793.58, -1501.4, 0.12)', 'true', 'Boathouse', 356, 'public', 'sea', '', 'true'),
+(26, 'paleto', 'Paleto Boathouse', 'vector3(-277.46, 6637.2, 7.48)', 'vector4(-289.2, 6637.96, 1.01, 45.5)', 'vector3(-289.2, 6637.96, 1.01)', 'true', 'Boathouse', 356, 'public', 'sea', '', 'true'),
+(27, 'millars', 'Millars Boathouse', 'vector3(1299.24, 4216.69, 33.9)', 'vector4(1297.82, 4209.61, 30.12, 253.5)', 'vector3(1297.82, 4209.61, 30.12)', 'true', 'Boathouse', 356, 'public', 'sea', '', 'true'),
+(28, 'seadepot', 'LSYMC Depot', 'vector3(-772.98, -1430.76, 1.59)', 'vector4(-729.77, -1355.49, 1.19, 142.5)', '', 'true', 'LSYMC Depot', 356, 'depot', 'sea', '', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qb-shops-config`
+--
+
+CREATE TABLE `qb-shops-config` (
+  `firearmslicensecheck` enum('true','false') NOT NULL DEFAULT 'false',
+  `sellcasinochips-coords` text NOT NULL,
+  `sellcasinochips-radius` float NOT NULL,
+  `sellcasinochips-ped` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `qb-shops-config`
+--
+
+INSERT INTO `qb-shops-config` (`firearmslicensecheck`, `sellcasinochips-coords`, `sellcasinochips-radius`, `sellcasinochips-ped`) VALUES
+('false', 'vector4(950.37, 34.72, 71.87, 33.82)', 1.5, 's_m_y_casino_01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qb-shops-config-locations`
+--
+
+CREATE TABLE `qb-shops-config-locations` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` text NOT NULL,
+  `label` text NOT NULL,
+  `type` text DEFAULT NULL,
+  `coords` text NOT NULL,
+  `ped` text NOT NULL,
+  `scenario` text NOT NULL,
+  `radius` float UNSIGNED NOT NULL,
+  `targetIcon` text NOT NULL,
+  `targetLabel` text NOT NULL,
+  `products` text NOT NULL,
+  `showblip` enum('true','false') NOT NULL DEFAULT 'true',
+  `blipsprite` int(11) UNSIGNED NOT NULL,
+  `blipscale` float UNSIGNED NOT NULL,
+  `blipcolor` int(11) UNSIGNED NOT NULL,
+  `enabled` enum('true','false') NOT NULL DEFAULT 'true'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `qb-shops-config-locations`
+--
+
+INSERT INTO `qb-shops-config-locations` (`id`, `name`, `label`, `type`, `coords`, `ped`, `scenario`, `radius`, `targetIcon`, `targetLabel`, `products`, `showblip`, `blipsprite`, `blipscale`, `blipcolor`, `enabled`) VALUES
+(1, '247supermarket', '24/7 Supermarket', '', 'vector4(24.47, -1346.62, 29.5, 271.66)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(2, '247supermarket2', '24/7 Supermarket', '', 'vector4(-3039.54, 584.38, 7.91, 17.27)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(3, '247supermarket3', '24/7 Supermarket', '', 'vector4(-3242.97, 1000.01, 12.83, 357.57)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(4, '247supermarket4', '24/7 Supermarket', '', 'vector4(1728.07, 6415.63, 35.04, 242.95)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(5, '247supermarket5', '24/7 Supermarket', '', 'vector4(1959.82, 3740.48, 32.34, 301.57)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(6, '247supermarket6', '24/7 Supermarket', '', 'vector4(549.13, 2670.85, 42.16, 99.39)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(7, '247supermarket7', '24/7 Supermarket', '', 'vector4(2677.47, 3279.76, 55.24, 335.08)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(8, '247supermarket8', '24/7 Supermarket', '', 'vector4(2556.66, 380.84, 108.62, 356.67)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(9, '247supermarket9', '24/7 Supermarket', '', 'vector4(372.66, 326.98, 103.57, 253.73)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(10, 'ltdgasoline', 'LTD Gasoline', '', 'vector4(-47.02, -1758.23, 29.42, 45.05)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(11, 'ltdgasoline2', 'LTD Gasoline', '', 'vector4(-706.06, -913.97, 19.22, 88.04)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(12, 'ltdgasoline3', 'LTD Gasoline', '', 'vector4(-1820.02, 794.03, 138.09, 135.45)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(13, 'ltdgasoline4', 'LTD Gasoline', '', 'vector4(1164.71, -322.94, 69.21, 101.72)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(14, 'ltdgasoline5', 'LTD Gasoline', '', 'vector4(1697.87, 4922.96, 42.06, 324.71)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'normal', 'true', 52, 0.6, 0, 'true'),
+(15, 'robsliquor', 'Rob\'s Liqour', '', 'vector4(-1221.58, -908.15, 12.33, 35.49)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'liquor', 'true', 52, 0.6, 0, 'true'),
+(16, 'robsliquor2', 'Rob\'s Liqour', '', 'vector4(-1486.59, -377.68, 40.16, 139.51)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'liquor', 'true', 52, 0.6, 0, 'true'),
+(17, 'robsliquor3', 'Rob\'s Liqour', '', 'vector4(-2966.39, 391.42, 15.04, 87.48)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'liquor', 'true', 52, 0.6, 0, 'true'),
+(18, 'robsliquor4', 'Rob\'s Liqour', '', 'vector4(1165.17, 2710.88, 38.16, 179.43)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'liquor', 'true', 52, 0.6, 0, 'true'),
+(19, 'robsliquor5', 'Rob\'s Liqour', '', 'vector4(1134.2, -982.91, 46.42, 277.24)', 'mp_m_shopkeep_01', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-shopping-basket', 'Open Shop', 'liquor', 'true', 52, 0.6, 0, 'true'),
+(20, 'hardware', 'Hardware Store', '', 'vector4(45.68, -1749.04, 29.61, 53.13)', 'mp_m_waremech_01', 'WORLD_HUMAN_CLIPBOARD', 1.5, 'fas fa-wrench', 'Open Hardware Store', 'hardware', 'true', 402, 0.8, 0, 'true'),
+(21, 'hardware2', 'Hardware Store', '', 'vector4(2747.71, 3472.85, 55.67, 255.08)', 'mp_m_waremech_01', 'WORLD_HUMAN_CLIPBOARD', 1.5, 'fas fa-wrench', 'Open Hardware Store', 'hardware', 'true', 402, 0.8, 0, 'true'),
+(22, 'hardware3', 'Hardware Store', '', 'vector4(-421.83, 6136.13, 31.88, 228.2)', 'mp_m_waremech_01', 'WORLD_HUMAN_CLIPBOARD', 1.5, 'fas fa-wrench', 'Hardware Store', 'hardware', 'true', 402, 0.8, 0, 'true'),
+(23, 'ammunation', 'Ammunation', 'weapon', 'vector4(-661.96, -933.53, 21.83, 177.05)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(24, 'ammunation2', 'Ammunation', 'weapon', 'vector4(809.68, -2159.13, 29.62, 1.43)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(25, 'ammunation3', 'Ammunation', 'weapon', 'vector4(1692.67, 3761.38, 34.71, 227.65)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(26, 'ammunation4', 'Ammunation', 'weapon', 'vector4(-331.23, 6085.37, 31.45, 228.02)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(27, 'ammunation5', 'Ammunation', 'weapon', 'vector4(253.63, -51.02, 69.94, 72.91)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(28, 'ammunation6', 'Ammunation', 'weapon', 'vector4(23.0, -1105.67, 29.8, 162.91)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(29, 'ammunation7', 'Ammunation', 'weapon', 'vector4(2567.48, 292.59, 108.73, 349.68)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(30, 'ammunation8', 'Ammunation', 'weapon', 'vector4(-1118.59, 2700.05, 18.55, 221.89)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(31, 'ammunation9', 'Ammunation', 'weapon', 'vector4(841.92, -1035.32, 28.19, 1.56)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(32, 'ammunation10', 'Ammunation', 'weapon', 'vector4(-1304.19, -395.12, 36.7, 75.03)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(33, 'ammunation11', 'Ammunation', 'weapon', 'vector4(-3173.31, 1088.85, 20.84, 244.18)', 's_m_y_ammucity_01', 'WORLD_HUMAN_COP_IDLES', 1.5, 'fas fa-gun', 'Open Ammunation', 'weapons', 'true', 110, 0.6, 0, 'true'),
+(34, 'casino', 'Diamond Casino', '', 'vector4(949.29, 32.13, 71.95, 79.54)', 'csb_tomcasino', 'WORLD_HUMAN_STAND_MOBILE', 1.5, 'fas fa-coins', 'Buy Chips', 'casino', 'true', 617, 0.8, 0, 'true'),
+(35, 'casinobar', 'Casino Bar', '', 'vector4(937.45, 27.22, 71.83, 61.21)', 'a_m_y_smartcaspat_01', 'WORLD_HUMAN_VALET', 1.5, 'fas fa-wine-bottle', 'Open Casino Bar', 'liquor', 'false', 52, 0.8, 0, 'true'),
+(36, 'weedshop', 'Smoke On The Water', '', 'vector4(-1171.31, -1570.89, 4.66, 130.03)', 'a_m_y_hippy_01', 'WORLD_HUMAN_AA_SMOKE', 1.5, 'fas fa-cannabis', 'Open Weed Shop', 'weedshop', 'true', 140, 0.8, 0, 'true'),
+(37, 'seaword', 'Sea Word', '', 'vector4(-1687.03, -1072.18, 13.15, 52.93)', 'a_m_y_beach_01', 'WORLD_HUMAN_STAND_IMPATIENT', 1.5, 'fas fa-fish', 'Sea Word', 'gearshop', 'true', 52, 0.8, 0, 'true'),
+(38, 'leisureshop', 'Leisure Shop', '', 'vector4(-1505.91, 1511.95, 115.29, 257.13)', 'a_m_y_beach_01', 'WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE', 1.5, 'fas fa-leaf', 'Open Leisure Shop', 'leisureshop', 'true', 52, 0.8, 0, 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qb-shops-config-products`
+--
+
+CREATE TABLE `qb-shops-config-products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `shops` text NOT NULL,
+  `name` text NOT NULL,
+  `price` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `info` text DEFAULT NULL,
+  `type` enum('item','weapon') NOT NULL DEFAULT 'item',
+  `requiredjob` text DEFAULT NULL,
+  `requiresLicense` enum('true','false') NOT NULL DEFAULT 'false',
+  `enabled` enum('true','false') NOT NULL DEFAULT 'true'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `qb-shops-config-products`
+--
+
+INSERT INTO `qb-shops-config-products` (`id`, `shops`, `name`, `price`, `amount`, `info`, `type`, `requiredjob`, `requiresLicense`, `enabled`) VALUES
+(1, 'normal', 'tosti', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(2, 'normal', 'water_bottle', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(3, 'normal', 'kurkakola', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(4, 'normal', 'twerks_candy', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(5, 'normal', 'snikkel_candy', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(6, 'normal', 'sandwich', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(7, 'normal', 'beer', 7, 50, NULL, 'item', NULL, 'false', 'true'),
+(8, 'normal', 'whiskey', 10, 50, NULL, 'item', NULL, 'false', 'true'),
+(9, 'normal', 'vodka', 12, 50, NULL, 'item', NULL, 'false', 'true'),
+(10, 'normal', 'bandage', 100, 50, NULL, 'item', NULL, 'false', 'true'),
+(11, 'normal', 'lighter', 2, 50, NULL, 'item', NULL, 'false', 'true'),
+(12, 'normal', 'rolling_paper', 2, 5000, NULL, 'item', NULL, 'false', 'true'),
+(13, 'liquor', 'beer', 7, 50, NULL, 'item', NULL, 'false', 'true'),
+(14, 'liquor', 'whiskey', 10, 50, NULL, 'item', NULL, 'false', 'true'),
+(15, 'liquor', 'vodka', 12, 50, NULL, 'item', NULL, 'false', 'true'),
+(16, 'hardware', 'lockpick', 200, 50, NULL, 'item', NULL, 'false', 'true'),
+(17, 'hardware', 'weapon_wrench', 250, 250, NULL, 'item', NULL, 'false', 'true'),
+(18, 'hardware', 'weapon_hammer', 250, 250, NULL, 'item', NULL, 'false', 'true'),
+(19, 'hardware', 'repairkit', 250, 50, NULL, 'item', '\'mechanic\',\'police\'', 'false', 'true'),
+(20, 'hardware', 'screwdriverset', 350, 50, NULL, 'item', NULL, 'false', 'true'),
+(21, 'hardware', 'phone', 850, 50, NULL, 'item', NULL, 'false', 'true'),
+(22, 'hardware', 'radio', 250, 50, NULL, 'item', NULL, 'false', 'true'),
+(23, 'hardware', 'binoculars', 50, 50, NULL, 'item', NULL, 'false', 'true'),
+(24, 'hardware', 'firework1', 50, 50, NULL, 'item', NULL, 'false', 'true'),
+(25, 'hardware', 'firework2', 50, 50, NULL, 'item', NULL, 'false', 'true'),
+(26, 'hardware', 'firework3', 50, 50, NULL, 'item', NULL, 'false', 'true'),
+(27, 'hardware', 'firework4', 50, 50, NULL, 'item', NULL, 'false', 'true'),
+(28, 'hardware', 'fitbit', 400, 150, NULL, 'item', NULL, 'false', 'true'),
+(29, 'hardware', 'cleaningkit', 150, 150, NULL, 'item', NULL, 'false', 'true'),
+(30, 'hardware', 'advancedrepairkit', 500, 50, NULL, 'item', 'mechanic', 'false', 'true'),
+(31, 'weedshop', 'joint', 10, 1000, NULL, 'item', NULL, 'false', 'true'),
+(32, 'weedshop', 'weapon_poolcue', 100, 1000, NULL, 'item', NULL, 'false', 'true'),
+(33, 'weedshop', 'weed_nutrition', 20, 1000, NULL, 'item', NULL, 'false', 'true'),
+(34, 'weedshop', 'empty_weed_bag', 2, 1000, NULL, 'item', NULL, 'false', 'true'),
+(35, 'weedshop', 'rolling_paper', 2, 1000, NULL, 'item', NULL, 'false', 'true'),
+(36, 'gearshop', 'diving_gear', 2500, 10, NULL, 'item', NULL, 'false', 'true'),
+(37, 'gearshop', 'jerry_can', 200, 50, NULL, 'item', NULL, 'false', 'true'),
+(38, 'leisureshop', 'parachute', 2500, 10, NULL, 'item', NULL, 'false', 'true'),
+(39, 'leisureshop', 'binoculars', 50, 50, NULL, 'item', NULL, 'false', 'true'),
+(40, 'leisureshop', 'diving_gear', 2500, 10, NULL, 'item', NULL, 'false', 'true'),
+(41, 'leisureshop', 'diving_fill', 500, 10, NULL, 'item', NULL, 'false', 'true'),
+(42, 'weapons', 'weapon_knife', 250, 250, NULL, 'weapon', NULL, 'false', 'true'),
+(43, 'weapons', 'weapon_bat', 250, 250, NULL, 'weapon', NULL, 'false', 'true'),
+(44, 'weapons', 'weapon_hatchet', 250, 250, NULL, 'weapon', '\'mechanic\', \'police\'', 'false', 'true'),
+(45, 'weapons', 'weapon_pistol', 2500, 5, NULL, 'weapon', NULL, 'true', 'true'),
+(46, 'weapons', 'weapon_snspistol', 1500, 5, NULL, 'weapon', NULL, 'true', 'true'),
+(47, 'weapons', 'weapon_vintagepistol', 4000, 5, NULL, 'weapon', NULL, 'true', 'true'),
+(48, 'weapons', 'pistol_ammo', 250, 250, NULL, 'item', NULL, 'false', 'true'),
+(49, 'casino', 'casinochips', 1, 999999, NULL, 'item', NULL, 'false', 'true');
 
 --
 -- Indexes for dumped tables
@@ -938,7 +1103,20 @@ ALTER TABLE `qb-garages-config`
 --
 ALTER TABLE `qb-garages-locations`
   ADD PRIMARY KEY (`qb-garages-location_id`),
-  ADD UNIQUE KEY `label` (`label`);
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `qb-shops-config-locations`
+--
+ALTER TABLE `qb-shops-config-locations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`) USING HASH;
+
+--
+-- Indexes for table `qb-shops-config-products`
+--
+ALTER TABLE `qb-shops-config-products`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -973,6 +1151,19 @@ ALTER TABLE `qb-garages-config`
 --
 ALTER TABLE `qb-garages-locations`
   MODIFY `qb-garages-location_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `qb-shops-config-locations`
+--
+ALTER TABLE `qb-shops-config-locations`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT for table `qb-shops-config-products`
+--
+ALTER TABLE `qb-shops-config-products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
