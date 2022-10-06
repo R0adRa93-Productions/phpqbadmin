@@ -1,0 +1,7 @@
+<?php
+ // Database Configuration Begins
+ $dbinfo['username'] = ""; // MySQL user name
+ $dbinfo['password'] = ""; // MySQL Password
+ $dbinfo['host'] = "localhost"; // MySQL Server Address
+ $dbinfo['dbname'] = "phpqbadmin"; // Database Name
+?>
