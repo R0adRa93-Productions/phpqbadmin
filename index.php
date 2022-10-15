@@ -34,6 +34,15 @@ require("includes/config.inc.php");
       </li>
      </ul>
     </li>
+    <li>qb-drugs
+     <ul>
+      <li>Manage \config.lua
+       <ul>
+        <li><a href="qb-drugs-config-populator.php">qb-drugs/config.lua populator</a></li>
+       </ul>
+      </li>
+     </ul>
+    </li>
     <li>qb-shops
      <ul>
       <li>Manage \config.lua

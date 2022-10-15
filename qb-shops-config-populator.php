@@ -14,10 +14,7 @@
  $shopprod = sqlrun($query);
  $query = "SELECT * FROM `qb-shops-config-locations`";
  $shoplocs = sqlrun($query);
- $fh = fopen(SHOPS,'w');
- $timestamp = mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y'));
- $timestamp = date('YmdHis', $timestamp);
- $output = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\r\nConfig = {}\r\nConfig.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Do not touch use server config file\r\nConfig.ShopsInvJsonFile = './json/shops-inventory.json' -- do not touch\r\nConfig.FirearmsLicenseCheck = {$shopconf[0]['firearmslicensecheck']}\r\nConfig.SellCasinoChips = {coords = {$shopconf[0]['sellcasinochips-coords']}, radius = {$shopconf[0]['sellcasinochips-radius']}, ped = '{$shopconf[0]['sellcasinochips-ped']}'}\r\nConfig.Products = {\r\n";
+ $output = "-- Date and Time Edited: " . date("Y-m-d H:i:s") . "\r\nConfig = {}\r\nConfig.UseTarget = GetConvar('UseTarget','false') == 'true' -- Do not touch use server config file\r\nConfig.ShopsInvJsonFile = './json/shops-inventory.json' -- do not touch\r\nConfig.FirearmsLicenseCheck = {$shopconf[0]['firearmslicensecheck']}\r\nConfig.SellCasinoChips = {coords = {$shopconf[0]['sellcasinochips-coords']},radius = {$shopconf[0]['sellcasinochips-radius']},ped = '{$shopconf[0]['sellcasinochips-ped']}'}\r\nConfig.Products = {\r\n";
  foreach($shopprod as $k => $v){
   if($v['enabled'] === 'true'){
    if($store != $v['shops']){
@@ -27,34 +24,29 @@
     $cnt = 0;
    }
    $cnt++;
-   $output .= "  [$cnt] = {[\"name\"] = \"{$v['name']}\", [\"price\"] = {$v['price']}, [\"amount\"] = {$v['amount']}, [\"type\"] = \"{$v['type']}\", [\"slot\"] = $cnt";
+   $output .= "  [$cnt] = {[\"name\"] = \"{$v['name']}\",[\"price\"] = {$v['price']},[\"amount\"] = {$v['amount']},[\"type\"] = \"{$v['type']}\",[\"slot\"] = $cnt";
    if(isset($v['requiredJob'])){
-    $output .= ", requiredJob = \"{$v['requiredJob']}\"";
+    $output .= ",requiredJob = \"{$v['requiredJob']}\"";
    }
    if(isset($v['info'])){
-    $output .= ", info = {{$v['info']}}";
+    $output .= ",[\"info\"] = {{$v['info']}}";
    }else{
-    $output .= ", info = {}";
+    $output .= ",[\"info\"] = {}";
    }
    if($v['requiresLicense'] === 'true') {
-    $output .= ", requiresLicense = {$v['requiresLicense']}";
+    $output .= ",requiresLicense = {$v['requiresLicense']}";
    }
    $output .= "},\r\n";
   }
  }
  $output .= " }\r\n}\r\nConfig.Locations = {\r\n";
  foreach($shoplocs as $k => $v){
-  $output .= " ['{$v['name']}'] = {[\"name\"] = \"{$v['name']}\", [\"label\"] = \"{$v['label']}\", [\"coords\"] = {$v['coords']}, [\"ped\"] = \"{$v['ped']}\", [\"scenario\"] = \"{$v['scenario']}\", [\"radius\"] = {$v['radius']}, [\"targetIcon\"] = \"{$v['targetIcon']}\", [\"targetLabel\"] = \"{$v['targetLabel']}\", [\"products\"] = Config.Products[\"{$v['products']}\"], [\"showblip\"] = {$v['showblip']}, [\"blipsprite\"] = {$v['blipsprite']}, [\"blipscale\"] = {$v['blipscale']}, [\"blipcolor\"] = {$v['blipcolor']}";
+  $output .= " [\"{$v['name']}\"] = {[\"name\"] = \"{$v['name']}\",[\"label\"] = \"{$v['label']}\",[\"coords\"] = {$v['coords']},[\"ped\"] = \"{$v['ped']}\",[\"scenario\"] = \"{$v['scenario']}\",[\"radius\"] = {$v['radius']},[\"targetIcon\"] = \"{$v['targetIcon']}\",[\"targetLabel\"] = \"{$v['targetLabel']}\",[\"products\"] = Config.Products[\"{$v['products']}\"],[\"showblip\"] = {$v['showblip']},[\"blipsprite\"] = {$v['blipsprite']},[\"blipscale\"] = {$v['blipscale']},[\"blipcolor\"] = {$v['blipcolor']}";
   if($v['type'] !== ''){
-   $output .= ", [\"type\"] = \"{$v['type']}\"";
+   $output .= ",[\"type\"] = \"{$v['type']}\"";
   }
   $output .= "},\r\n";
  }
- $output .= "}\r\n";
- if(fwrite($fh,$output)){
-  echo "<html><head><title>phpqbadmin Happy Potato</title></head><body><h1>Happy Potato</h1><p>The qb-shops/config.lua file was <em>successfully</em> updated.</p></body></html>";
-  fclose($fh);
- }else{
-  echo "<html><head><title>phpqbadmin Sad Potato</title></head><body><h1>Sad Potato</h1><p>The qb-shops/config.lua file was <em>not</em> updated.</p></body></html>";
- }
+ $output .= "}";
+ write_config(QB_SHOPS_CONFIG,$output);
 ?>
